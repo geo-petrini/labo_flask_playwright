@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Input</h3>
+<form method="POST" action="{{ url_for('default.data_submit') }}" novalidate>
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name" value="{{ name or '' }}"
+            placeholder="Inserisci il tuo nome" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="message" class="form-label">Message</label>
+        <textarea class="form-control" id="message" name="message" rows="5" placeholder="Scrivi qui il tuo messaggio..."
+            required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Invia messaggio</button>
+</form>
+
+<h3>Data</h3>
+{% if data %}
+<div class="row">
+    {% for item in data %}
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <ul>
+                    {% for key, value in item.items() %}
+                    <li><strong>{{key}}</strong> {{value}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{{data}}
+{% endif %}
+
+{% endblock %}
